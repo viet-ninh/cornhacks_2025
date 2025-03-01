@@ -95,3 +95,19 @@ div.center_align_column {
   width: 200px;
   height: 200px;
 }
+
+.corn_plus_text {
+  position: absolute;
+  pointer-events: none;
+  animation: move_corn_plus_text 1s forwards;
+}
+
+@keyframes move_corn_plus_text {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(var(--move-x), var(--move-y));
+    opacity: 0;
+  }
+}
