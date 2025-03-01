@@ -3,8 +3,8 @@ import "./../globals.css";
 import { useState, useEffect, useRef } from 'react';
 import Cookies from 'js-cookie';
 import * as THREE from 'three';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { OBJLoader } from 'three-stdlib';
+import { MTLLoader } from 'three-stdlib';
 import { useClickContext } from "./CornItemContext";
 
 
