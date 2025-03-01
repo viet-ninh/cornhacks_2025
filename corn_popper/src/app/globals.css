@@ -95,3 +95,13 @@ div.center_align_column {
   width: 200px;
   height: 200px;
 }
+
+.corn_click_image:hover {
+  cursor: pointer;
+}
+
+/*#region Button styling*/
+.item_button:hover {
+  cursor: pointer;
+}
+/*#endregion RegionName*/

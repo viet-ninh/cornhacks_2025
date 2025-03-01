@@ -4,11 +4,12 @@ import Image from 'next/image';
 import cornImage from '../../../public/CornHackLogo.png'; 
 import { useState,useEffect } from 'react';
 import Cookies from 'js-cookie';
+import { useClickContext } from "./CornItemContext";
 
 
 export default function CornClick() {
 
-    const [clickCount, setClickCount] = useState<number>(0);
+    const { clickCount, setClickCount } = useClickContext();
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -18,7 +19,7 @@ export default function CornClick() {
             setClickCount(parseInt(storedCount));
         }
         setLoading(false); // Set loading to false after cookies are read
-    }, []); // Empty dependency array ensures it runs only once after the component mounts
+    }, [setClickCount]); // Empty dependency array ensures it runs only once after the component mounts
 
 
     const handleClick = () => {
@@ -38,6 +39,7 @@ export default function CornClick() {
             <h3 className="corn_per_second">per second: 0</h3>
         </div>
         <Image 
+                className="corn_click_image"
                 src={cornImage} 
                 alt="Corn Hack Logo" 
                 onClick={handleClick}

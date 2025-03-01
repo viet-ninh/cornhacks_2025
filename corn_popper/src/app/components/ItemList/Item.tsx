@@ -1,26 +1,35 @@
 'use client';
-import ItemClass from "./ItemClass";
+import CornClick from "../CornClick";
+import Cookies from 'js-cookie';
+import { useClickContext } from "../CornItemContext";
 
 interface ItemProps {
-  items: { name: string; cost: number; CPS: number; count: number }[];
+  items: { id: number; name: string; cost: number; CPS: number; count: number }[];
 }
-
-// function handleItemClick(item : ItemClass) : undefined {
-//   console.log("Item clicked: " + item.displayInfo)
-// }
 
 export default function Item({ items }: ItemProps ) {
 
-  const test = () => {
-    console.log("Item clicked");
+  const { clickCount, setClickCount } = useClickContext();
+
+  const BuyItem = (item: { id: number; name: string; cost: number; CPS: number; count: number }) => {
+    if (clickCount >= item.cost) {
+      var newAmount = clickCount - item.cost;
+      setClickCount(newAmount); // Deduct the cost from clickCount
+      Cookies.set('clickCount', newAmount.toString(), { expires: 365}); 
+      console.log(`Purchased: ${item.name}`);
+      // You can also update the item's count or other logic here
+
+    } else {
+      console.log('Not enough cookies to buy this item.');
+    }
   };
   
   return (
       items.map((item, index) => {      
 
         return (
-          <li key={index} className="block p-2 hover:bg-gray-700 rounded">
-            <div style={{ display: 'flex', justifyContent: 'space-between' }} onClick= {test} >
+          <li key={index} className="item_button block p-2 hover:bg-gray-700 rounded">
+            <div style={{ display: 'flex', justifyContent: 'space-between' }} onClick= {() => BuyItem(item)} >
               {/* Column for name and cost */}
               <div style={{ flex: 1 }}>
                 <div>{item.name}</div>
