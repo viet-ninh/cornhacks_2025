@@ -3,24 +3,16 @@ import "./../globals.css"
 import Image from 'next/image'; // Import Next.js Image component
 import cornImage from '../../../public/CornHackLogo.png'; // Import the image from the same folder
 
-// import { useState } from "react";
+import { useState } from 'react';
 
-
-
-let clickCount = 0;
-
-export function setClickCount(count: number): void {
-    clickCount = count;
-}
 
 export default function CornClick() {
-    
-    // const [clickCount, setClickCount] = useState(0);
-  
+      
+    const [clickCount, setClickCount] = useState(0);
+
     const handleClick = () => {
-      setClickCount(clickCount + 1); // Increment click countlink
-      console.log(clickCount);
-    }
+        setClickCount(prevCount => prevCount + 1);
+    };
      
     return (
     <div className="center_align_column text_color corn_click_column">
