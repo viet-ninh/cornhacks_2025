@@ -111,3 +111,9 @@ div.center_align_column {
     opacity: 0;
   }
 }
+
+.corn_3d_box{
+  border-style:solid;
+  border-color:#171717;
+  border-width: 2px;
+}
