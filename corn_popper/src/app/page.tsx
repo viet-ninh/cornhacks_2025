@@ -1,4 +1,5 @@
 import CornClick from './components/CornClick'
+import ItemList from './components/ItemList';
 import './globals.css'
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
         {/* center screen goes here */}
       </div>
       <div className="flex_item">
-        {/* item_list goes here */}
+        <ItemList/>
       </div>
     </div>
   );
