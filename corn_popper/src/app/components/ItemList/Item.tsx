@@ -2,6 +2,7 @@
 //import CornClick from "../CornClick";
 import Cookies from 'js-cookie';
 import { useClickContext } from "../CornItemContext";
+import { useEffect } from 'react';
 
 // interface ItemProps {
 //   items: { id: number; name: string; cost: number; CPS: number; count: number }[];
@@ -11,6 +12,7 @@ import { useClickContext } from "../CornItemContext";
 export default function Item() {
 
   const { cornCount, setCornCount, items, setItems } = useClickContext();
+
 
   const BuyItem = (item: { id: number; name: string; cost: number; CPS: number; count: number }) => {
     if (cornCount >= item.cost) {
@@ -26,6 +28,8 @@ export default function Item() {
           prevItem.id === item.id ? { ...prevItem, count: prevItem.count + 1 } : prevItem
         )
       );
+      console.log(JSON.stringify(item));
+      Cookies.set(`item_id_${item.id}`, JSON.stringify(item) , { expires: 365}); 
 
 
     } else {
