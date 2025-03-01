@@ -1,5 +1,5 @@
 import CornClick from './components/CornClick'
-import ItemList from './components/ItemList';
+import ItemList from './components/ItemList/ItemList';
 import './globals.css'
 
 export default function Home() {
