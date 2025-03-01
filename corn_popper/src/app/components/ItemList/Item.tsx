@@ -1,25 +1,50 @@
+'use client';
 import ItemClass from "./ItemClass";
 
 interface ItemProps {
-  items: ItemClass[]; // Expect an array of ItemClass instances
+  items: { name: string; cost: number; CPS: number; count: number }[];
 }
 
-export default function Item({ items }: ItemProps) {
+// function handleItemClick(item : ItemClass) : undefined {
+//   console.log("Item clicked: " + item.displayInfo)
+// }
+
+export default function Item({ items }: ItemProps ) {
+
+  const test = () => {
+    console.log("Item clicked");
+  };
+  
   return (
-    <div>
-      {items.map((item, index) => {
-        const itemInstance = new ItemClass(
-          item.name,
-          item.cost,
-          item.CPS,
-          item.count
-        );
+      items.map((item, index) => {      
+
         return (
-          <div key={index} className="p-2 border-b">
-            {itemInstance.displayInfo()}
-          </div>
+          <li key={index} className="block p-2 hover:bg-gray-700 rounded">
+            <div style={{ display: 'flex', justifyContent: 'space-between' }} onClick= {test} >
+              {/* Column for name and cost */}
+              <div style={{ flex: 1 }}>
+                <div>{item.name}</div>
+                <div style={{ fontSize: '12px' }}>
+                  <img
+                    src="CornHackLogo.png"
+                    alt="Image"
+                    style={{
+                      height: '1em',
+                      width: 'auto',
+                      marginRight: '8px',
+                      display: 'inline-flex',
+                    }}
+                  />
+                  {item.cost}
+                </div>
+              </div>
+              {/* Column for item count */}
+              <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
+                {item.count}
+              </div>
+            </div>
+          </li>
         );
-      })}
-    </div>
+      })
   );
 }

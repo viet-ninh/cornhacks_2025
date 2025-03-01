@@ -1,9 +1,11 @@
 export default class ItemClass {
+  id: number;
   name: string;
   cost: number;
   CPS: number; // clicks per second
   count: number;
-  constructor(name: string, cost: number, CPS: number, count: number) {
+  constructor(id: number, name: string, cost: number, CPS: number, count: number) {
+    this.id = id;
     this.name = name;
     this.cost = cost;
     this.CPS = CPS;
@@ -11,6 +13,6 @@ export default class ItemClass {
   }
 
   displayInfo(): string {
-    return `Item: ${this.name}, Cost: ${this.cost} corn, CPS: ${this.CPS}, Count: ${this.count}`;
+    return `Item: Id: ${this.id}, Name: ${this.name}, Cost: ${this.cost} ${this.CPS}, Count: ${this.count}`;
   }
 }
