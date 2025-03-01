@@ -2,8 +2,8 @@
 import { createContext, useContext, useState } from 'react';
 
 interface CornItemContex {
-    clickCount: number;
-    setClickCount: (count: number) => void;
+    cornCount: number;
+    setCornCount: (count: number) => void;
   }
 
 const CornItemContex = createContext<CornItemContex | undefined>(undefined);
@@ -17,10 +17,10 @@ export const useClickContext = () => {
 };
 
 export const ClickProvider = ({ children }: { children: React.ReactNode }) => {
-  const [clickCount, setClickCount] = useState<number>(0);
+  const [cornCount, setCornCount] = useState<number>(0);
 
   return (
-    <CornItemContex.Provider value={{ clickCount, setClickCount }}>
+    <CornItemContex.Provider value={{ cornCount, setCornCount }}>
       {children}
     </CornItemContex.Provider>
   );

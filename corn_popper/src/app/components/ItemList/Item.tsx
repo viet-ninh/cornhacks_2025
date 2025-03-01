@@ -9,13 +9,13 @@ interface ItemProps {
 
 export default function Item({ items }: ItemProps ) {
 
-  const { clickCount, setClickCount } = useClickContext();
+  const { cornCount, setCornCount } = useClickContext();
 
   const BuyItem = (item: { id: number; name: string; cost: number; CPS: number; count: number }) => {
-    if (clickCount >= item.cost) {
-      var newAmount = clickCount - item.cost;
-      setClickCount(newAmount); // Deduct the cost from clickCount
-      Cookies.set('clickCount', newAmount.toString(), { expires: 365}); 
+    if (cornCount >= item.cost) {
+      var newAmount = cornCount - item.cost;
+      setCornCount(newAmount); // Deduct the cost from cornCount
+      Cookies.set('cornCount', newAmount.toString(), { expires: 365}); 
       console.log(`Purchased: ${item.name}`);
       // You can also update the item's count or other logic here
 

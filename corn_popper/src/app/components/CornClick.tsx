@@ -10,19 +10,19 @@ import { useClickContext } from "./CornItemContext";
 
 export default function CornClick() {
 
-    const { clickCount, setClickCount } = useClickContext();
+    const { cornCount, setCornCount } = useClickContext();
     const [clickedPositions, setClickedPositions] = useState<{x: number, y: number, x_direction: number, y_direction: number, time_created: number}[]>([])
     const [loading, setLoading] = useState<boolean>(true);
     const sceneRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         // Read the cookie after the component has mounted
-        const storedCount = Cookies.get('clickCount');
+        const storedCount = Cookies.get('cornCount');
         if (storedCount) {
-            setClickCount(parseInt(storedCount));
+            setCornCount(parseInt(storedCount));
         }
         setLoading(false); // Set loading to false after cookies are read
-    }, [setClickCount]); // Empty dependency array ensures it runs only once after the component mounts
+    }, [setCornCount]); // Empty dependency array ensures it runs only once after the component mounts
 
     useEffect(() => {
         const scene = new THREE.Scene();
@@ -66,9 +66,9 @@ export default function CornClick() {
     }, []);
 
     const handleClick = (event: React.MouseEvent) => {
-        const newCount = clickCount + 1;
-        setClickCount(newCount);
-        Cookies.set('clickCount', newCount.toString(), {expires: 365}); 
+        const newCount = cornCount + 1;
+        setCornCount(newCount);
+        Cookies.set('cornCount', newCount.toString(), {expires: 365}); 
         
         // Get random number -1 to 1
         const x_direction = (Math.random() * 2) - 1
@@ -89,7 +89,7 @@ export default function CornClick() {
         </div>
         <div className="corn_info_container">
             <h1 className="corn_count">
-                {clickCount !== null ? `${clickCount} Corn` : `Loading...`}
+                {cornCount !== null ? `${cornCount} Corn` : `Loading...`}
             </h1>
             <h3 className="corn_per_second">per second: 0</h3>
         </div>
