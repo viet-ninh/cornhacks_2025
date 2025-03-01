@@ -29,10 +29,14 @@ export default function CornClick() {
     };
      
     return (
-    <div className="center_align_column text_color corn_click_column">
-        <h1 className="farm_name">Farm Name</h1>
-        <h1 className="cookie_count">{clickCount} Cookies</h1>
-        <h3 className="count_per_second">per second: 0</h3>
+        <div className="center_align_column text_style corn_click_column">
+        <div className="farm_name_container rounded_corners">
+            <h1 className="farm_name">Farm Name</h1>
+        </div>
+        <div className="corn_info_container">
+            <h1 className="corn_count">{clickCount} Cookies</h1>
+            <h3 className="corn_per_second">per second: 0</h3>
+        </div>
         <Image 
                 src={cornImage} 
                 alt="Corn Hack Logo" 
