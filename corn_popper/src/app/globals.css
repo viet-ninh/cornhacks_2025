@@ -51,6 +51,7 @@ div.center_align_column {
 .text_style {
   color:var(--text-color);
   font-family: cursive;
+  user-select: none;
 }
 
 /* CornClick styling */
