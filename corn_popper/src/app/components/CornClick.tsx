@@ -1,7 +1,7 @@
 'use client'
 import "./../globals.css"
-import Image from 'next/image'; // Import Next.js Image component
-import cornImage from '../../../public/CornHackLogo.png'; // Import the image from the same folder
+import Image from 'next/image';
+import cornImage from '../../../public/CornHackLogo.png';
 
 import { useState } from 'react';
 
@@ -15,12 +15,16 @@ export default function CornClick() {
     };
      
     return (
-    <div className="center_align_column text_color corn_click_column">
-        <h1 className="farm_name">Farm Name</h1>
-        <h1 className="cookie_count">{clickCount} Cookies</h1>
-        <h3 className="count_per_second">per second: 0</h3>
+    <div className="center_align_column text_style corn_click_column">
+        <div className="farm_name_container rounded_corners">
+            <h1 className="farm_name">Farm Name</h1>
+        </div>
+        <div className="corn_info_container">
+            <h1 className="corn_count">{clickCount} Cookies</h1>
+            <h3 className="corn_per_second">per second: 0</h3>
+        </div>
         <Image 
-                src={cornImage} // No need to add './' or '/'; use the imported image
+                src={cornImage}
                 alt="Corn Hack Logo" 
                 onClick={handleClick}
             />
