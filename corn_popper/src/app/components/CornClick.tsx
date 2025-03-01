@@ -89,7 +89,7 @@ export default function CornClick() {
         </div>
         <div className="corn_info_container">
             <h1 className="corn_count">
-                {cornCount !== null ? `${cornCount} Corn` : `Loading...`}
+                {cornCount !== -1 ? `${cornCount} Corn` : `Loading...`}
             </h1>
             <h3 className="corn_per_second">per second: 0</h3>
         </div>

@@ -4,11 +4,6 @@ import { ClickProvider } from './components/CornItemContext';
 import './globals.css'
 
 export default function Home() {
-
-  // TODO: we need to grab items from cookies/context 
-  // and pass them down to our ItemList
-  // var items = grabItems();
-
   return (
     <ClickProvider>
       <div className="flex_container">

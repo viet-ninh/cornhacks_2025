@@ -1,10 +1,16 @@
 'use client';
 import { createContext, useContext, useState } from 'react';
 
+interface Item {
+  id: number; name: string; cost: number; CPS: number; count: number
+}
+
 interface CornItemContex {
-    cornCount: number;
-    setCornCount: (count: number) => void;
-  }
+  cornCount: number;
+  setCornCount: (count: number) => void;
+  items: Item[];
+  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+}
 
 const CornItemContex = createContext<CornItemContex | undefined>(undefined);
 
@@ -17,10 +23,18 @@ export const useClickContext = () => {
 };
 
 export const ClickProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cornCount, setCornCount] = useState<number>(0);
+  // TODO: populate from cookies (I think)
+  const initItems: Item[] = [
+    { id: 1, name: "Farm", cost: 1, CPS: 5, count: 0 },
+    { id: 2, name: "Robot", cost: 2, CPS: 4, count: 0},
+    { id: 3, name: "Space Gangster", cost: 16, CPS: 3, count: 0}
+  ];
+
+  const [cornCount, setCornCount] = useState<number>(-1);
+  const [items, setItems] = useState<Item[]>(initItems);
 
   return (
-    <CornItemContex.Provider value={{ cornCount, setCornCount }}>
+    <CornItemContex.Provider value={{ cornCount, setCornCount, items, setItems }}>
       {children}
     </CornItemContex.Provider>
   );
