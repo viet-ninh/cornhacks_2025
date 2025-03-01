@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 export default function CornClick() {
 
-    const [clickCount, setClickCount] = useState<number>(0);
+    const [clickCount, setClickCount] = useState<number | null>(null);
     const [clickedPositions, setClickedPositions] = useState<{x: number, y: number, x_direction: number, y_direction: number, time_created: number}[]>([])
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -45,7 +45,9 @@ export default function CornClick() {
             <h1 className="farm_name">Farm Name</h1>
         </div>
         <div className="corn_info_container">
-            <h1 className="corn_count">{clickCount} Cookies</h1>
+            <h1 className="corn_count">
+                {clickCount !== null ? `${clickCount} Corn` : `Loading...`}
+            </h1>
             <h3 className="corn_per_second">per second: 0</h3>
         </div>
         <Image 
