@@ -1,17 +1,22 @@
 'use client'
 import "./../globals.css"
-import Image from 'next/image'; // Import Next.js Image component
-import cornImage from '../../../public/CornHackLogo.png'; // Import the image from the same folder
-
+import Image from 'next/image';
+import cornImage from '../../../public/CornHackLogo.png'; 
 import { useState } from 'react';
+import Cookies from 'js-cookie';
 
 
 export default function CornClick() {
-      
-    const [clickCount, setClickCount] = useState(0);
+
+    const initialCount = Cookies.get('clickCount') ? parseInt(Cookies.get('clickCount')!) : 0;
+    const [clickCount, setClickCount] = useState<number>(initialCount);
+
 
     const handleClick = () => {
-        setClickCount(prevCount => prevCount + 1);
+        const newCount = clickCount + 1;
+        setClickCount(newCount);
+        Cookies.set('clickCount', newCount.toString(), { expires: 365}); 
+
     };
      
     return (
@@ -20,7 +25,7 @@ export default function CornClick() {
         <h1 className="cookie_count">{clickCount} Cookies</h1>
         <h3 className="count_per_second">per second: 0</h3>
         <Image 
-                src={cornImage} // No need to add './' or '/'; use the imported image
+                src={cornImage} 
                 alt="Corn Hack Logo" 
                 onClick={handleClick}
             />
