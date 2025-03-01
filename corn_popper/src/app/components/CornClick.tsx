@@ -19,7 +19,9 @@ export default function CornClick() {
         // Read the cookie after the component has mounted
         const storedCount = Cookies.get('cornCount');
         if (storedCount) {
-            setCornCount(parseInt(storedCount));
+            setCornCount(parseInt(storedCount)); // Set to cookie value if it exists
+        } else {
+            setCornCount(0); // Set to 0 if the cookie doesn't exist
         }
         setLoading(false); // Set loading to false after cookies are read
     }, [setCornCount]); // Empty dependency array ensures it runs only once after the component mounts
