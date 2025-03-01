@@ -1,17 +1,22 @@
 'use client'
 import "./../globals.css"
 import Image from 'next/image';
-import cornImage from '../../../public/CornHackLogo.png';
-
+import cornImage from '../../../public/CornHackLogo.png'; 
 import { useState } from 'react';
+import Cookies from 'js-cookie';
 
 
 export default function CornClick() {
-      
-    const [clickCount, setClickCount] = useState(0);
+
+    const initialCount = Cookies.get('clickCount') ? parseInt(Cookies.get('clickCount')!) : 0;
+    const [clickCount, setClickCount] = useState<number>(initialCount);
+
 
     const handleClick = () => {
-        setClickCount(prevCount => prevCount + 1);
+        const newCount = clickCount + 1;
+        setClickCount(newCount);
+        Cookies.set('clickCount', newCount.toString(), { expires: 365}); 
+
     };
      
     return (
@@ -24,7 +29,7 @@ export default function CornClick() {
             <h3 className="corn_per_second">per second: 0</h3>
         </div>
         <Image 
-                src={cornImage}
+                src={cornImage} 
                 alt="Corn Hack Logo" 
                 onClick={handleClick}
             />
