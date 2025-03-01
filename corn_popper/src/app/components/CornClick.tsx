@@ -1,9 +1,10 @@
 'use client'
-import "./../globals.css"
-import Image from 'next/image';
-import cornImage from '../../../public/CornHackLogo.png'; 
-import { useState,useEffect } from 'react';
+import "./../globals.css";
+import { useState, useEffect, useRef } from 'react';
 import Cookies from 'js-cookie';
+import * as THREE from 'three';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { useClickContext } from "./CornItemContext";
 
 
@@ -12,6 +13,7 @@ export default function CornClick() {
     const { clickCount, setClickCount } = useClickContext();
     const [clickedPositions, setClickedPositions] = useState<{x: number, y: number, x_direction: number, y_direction: number, time_created: number}[]>([])
     const [loading, setLoading] = useState<boolean>(true);
+    const sceneRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         // Read the cookie after the component has mounted
@@ -22,6 +24,46 @@ export default function CornClick() {
         setLoading(false); // Set loading to false after cookies are read
     }, [setClickCount]); // Empty dependency array ensures it runs only once after the component mounts
 
+    useEffect(() => {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(400, 400);
+        renderer.setClearColor(0x000000, 0);
+
+        if (sceneRef.current) {
+            sceneRef.current.appendChild(renderer.domElement);
+        }
+
+        const light = new THREE.AmbientLight(0xffffff, 1);
+        scene.add(light);
+        camera.position.z = 5;
+
+        const mtlLoader = new MTLLoader();
+        mtlLoader.load('../../../models/11548_Ear_Of_Corn_Yellow_V2_l3.mtl', (materials) => {
+            materials.preload();
+            const objLoader = new OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.load('../../../models/11548_Ear_Of_Corn_Yellow_V2_l3.obj', (object) => {
+                object.rotation.x = 0; 
+                object.rotation.y = 0; 
+                object.rotation.z = -Math.PI/2.75;
+                object.scale.set(0.3, 0.3, 0.3); 
+                scene.add(object);
+
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    object.rotation.y += 0.015;
+                    renderer.render(scene, camera);
+                };
+                animate();
+            });
+        });
+
+        return () => {
+            renderer.dispose();
+        };
+    }, []);
 
     const handleClick = (event: React.MouseEvent) => {
         const newCount = clickCount + 1;
@@ -51,13 +93,7 @@ export default function CornClick() {
             </h1>
             <h3 className="corn_per_second">per second: 0</h3>
         </div>
-        <Image 
-                className="corn_click_image"
-                src={cornImage} 
-                alt="Corn Hack Logo" 
-                onClick={handleClick}
-            />
-
+        <div ref={sceneRef} className="corn_3d_box" onClick={handleClick} ></div>
             {/* Conditionally render texts at the cursor positions if clickedPositions is not empty */}
             {clickedPositions.map((position) => (
                 <div

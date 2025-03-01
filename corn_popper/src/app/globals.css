@@ -51,6 +51,7 @@ div.center_align_column {
 .text_style {
   color:var(--text-color);
   font-family: cursive;
+  user-select: none;
 }
 
 /* CornClick styling */
@@ -119,4 +120,10 @@ div.center_align_column {
     transform: translate(var(--move-x), var(--move-y));
     opacity: 0;
   }
+}
+
+.corn_3d_box{
+  border-style:solid;
+  border-color:#171717;
+  border-width: 2px;
 }
