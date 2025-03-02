@@ -93,28 +93,43 @@ export default function CornClick() {
     const [totalCPS, setTotalCPS] = useState(0);
 
     useEffect(() => {
-      const itemIds = items.map((item) => item.id);
-      
-      itemIds.forEach((itemId) => {
-        const storedItem = Cookies.get(`item_id_${itemId}`);
-        if (storedItem) {
-          const parsedItem = JSON.parse(storedItem);
-          
-          setItems((prevItems) =>
-            prevItems.map((prevItem) =>
-              prevItem.id === parsedItem.id ? parsedItem : prevItem
-            )
-          );
-        }
-      });
+        const itemIds = items.map((item) => item.id);
+        
+        // Reading cookies for each item
+        itemIds.forEach((itemId) => {
+            const storedItem = Cookies.get(`item_id_${itemId}`);
+            if (storedItem) {
+                const parsedItem = JSON.parse(storedItem);
+
+                // Update items state with the parsed item data
+                setItems((prevItems) =>
+                    prevItems.map((prevItem) =>
+                        prevItem.id === parsedItem.id ? parsedItem : prevItem
+                    )
+                );
+            }
+        });
+    }, []); // This runs once, when the component first mounts
+
+    // 2. Recalculate total CPS whenever the `items` state changes
+    useEffect(() => {
+        const newTotalCPS = items.reduce((sum, item) => {
+            return sum + (item.count * item.CPS);
+        }, 0);
+
+        setTotalCPS(newTotalCPS);  // Set the calculated total CPS
+    }, [items]);  // This runs every time `items` changes
+
+    // Update corn count by adding totalCPS every second
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const newCornCount = cornCount + totalCPS;
+            setCornCount(newCornCount);
+            Cookies.set('cornCount', newCornCount.toString(), { expires: 365 });
+        }, 1000);
     
-      // Calculate total CPS
-      const newTotalCPS = items.reduce((sum, item) => {
-        return sum + (item.count * item.CPS);
-      }, 0);
-    
-      setTotalCPS(newTotalCPS);
-    }, [items, setItems]);
+        return () => clearInterval(interval);
+    }, [cornCount, totalCPS]);
      
     return (
         <div className="center_align_column text_style corn_click_column ">
