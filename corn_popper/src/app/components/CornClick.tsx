@@ -85,6 +85,32 @@ export default function CornClick() {
             setClickedPositions((prevPositions) => prevPositions.filter(click => click !== newClick));
         }, 1000);
     };
+    //calculate total CPS
+    const [totalCPS, setTotalCPS] = useState(0);
+
+    useEffect(() => {
+      const itemIds = items.map((item) => item.id);
+      
+      itemIds.forEach((itemId) => {
+        const storedItem = Cookies.get(`item_id_${itemId}`);
+        if (storedItem) {
+          const parsedItem = JSON.parse(storedItem);
+          
+          setItems((prevItems) =>
+            prevItems.map((prevItem) =>
+              prevItem.id === parsedItem.id ? parsedItem : prevItem
+            )
+          );
+        }
+      });
+    
+      // Calculate total CPS
+      const newTotalCPS = items.reduce((sum, item) => {
+        return sum + (item.count * item.CPS);
+      }, 0);
+    
+      setTotalCPS(newTotalCPS);
+    }, [items, setItems]);
      
     return (
         <div className="center_align_column text_style corn_click_column ">
@@ -95,7 +121,7 @@ export default function CornClick() {
             <h1 className="corn_count">
                 {cornCount !== -1 ? `${cornCount} Corn` : `Loading...`}
             </h1>
-            <h3 className="corn_per_second">per second: 0</h3>
+            <h3 className="corn_per_second">per second: {totalCPS}</h3>
         </div>
         <div ref={sceneRef} className="corn_3d_box" onClick={handleClick} ></div>
             {/* Conditionally render texts at the cursor positions if clickedPositions is not empty */}
