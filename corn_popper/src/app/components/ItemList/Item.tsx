@@ -1,14 +1,8 @@
 'use client';
-//import CornClick from "../CornClick";
 import Cookies from 'js-cookie';
 import { useClickContext } from "../CornItemContext";
-import { use, useEffect } from 'react';
+import {  useEffect } from 'react';
 
-// interface ItemProps {
-//   items: { id: number; name: string; cost: number; CPS: number; count: number }[];
-// }
-
-// export default function Item({ items }: ItemProps ) {
 export default function Item() {
 
   const { cornCount, setCornCount, items, setItems } = useClickContext();
