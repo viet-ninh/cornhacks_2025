@@ -75,6 +75,7 @@ export default function CornClick() {
         const sound = new Audio("/PopcornPop.mp3");
         sound.load()
         sound.play()
+        
         const newCount = cornCount + 1;
         setCornCount(newCount);
         Cookies.set('cornCount', newCount.toString(), {expires: 365}); 
