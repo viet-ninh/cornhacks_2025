@@ -24,7 +24,6 @@ body {
   background: var(--background);
   background-image: url('../../public/page_background.jpg'
   );
-  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
@@ -125,7 +124,7 @@ div.center_align_column {
 .corn_3d_box{
   border-style:solid;
   border-color:#171717;
-  border-width: 2px;
+  border-width: 5px;
 }
 
 /* Passive Workers Styling */

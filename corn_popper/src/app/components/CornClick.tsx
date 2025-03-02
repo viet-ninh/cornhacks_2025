@@ -10,7 +10,7 @@ import { useClickContext } from "./CornItemContext";
 
 export default function CornClick() {
 
-    const { cornCount, setCornCount } = useClickContext();
+    const { cornCount, setCornCount, items, setItems } = useClickContext();
     const [clickedPositions, setClickedPositions] = useState<{x: number, y: number, x_direction: number, y_direction: number, time_created: number}[]>([])
     const [loading, setLoading] = useState<boolean>(true);
     const sceneRef = useRef<HTMLDivElement | null>(null);
@@ -62,6 +62,8 @@ export default function CornClick() {
             });
         });
 
+        // const total_cps = 
+
         return () => {
             renderer.dispose();
         };
@@ -85,7 +87,7 @@ export default function CornClick() {
     };
      
     return (
-        <div className="center_align_column text_style corn_click_column">
+        <div className="center_align_column text_style corn_click_column ">
         <div className="farm_name_container rounded_corners">
             <h1 className="farm_name">Farm Name</h1>
         </div>

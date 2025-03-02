@@ -10,14 +10,16 @@ export default function Home() {
     <ClickProvider>
       <ResetButton/>
       <div className="flex_container">
-        <div className="flex_item">
+        <div className="flex_item overflow: 'hidden'">
           <CornClick/>
         </div>
         <div className="flex_item">
           <PassiveWorkers/>
         </div>
         <div className="flex_item p-4" >
-          <ItemList/>
+          <div className="h-full overflow-y-auto">
+            <ItemList />
+          </div>
         </div>
       </div>
     </ClickProvider>
