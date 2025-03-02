@@ -70,6 +70,29 @@ export default function CornClick() {
             renderer.dispose();
         };
     }, []);
+// Farm Name 
+    const [farmName, setFarmName] = useState<string>("");
+
+    useEffect(() => {
+        // Check if the 'farmName' cookie exists
+        const storedName = Cookies.get('farmName');
+
+        if (!storedName) {
+            // If the cookie doesn't exist, create it and set the value to 'Farm Name'
+            Cookies.set('farmName', 'Farm Name', { expires: 365 });
+            setFarmName('Farm Name'); // Update the state
+        } else {
+            // If the cookie exists, use its value
+            setFarmName(storedName);
+        }
+    }, []);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const currentValue = event.target.value;
+        Cookies.set('farmName', currentValue, { expires: 365 });
+        setFarmName(currentValue);
+        
+    }
 
     const handleClick = (event: React.MouseEvent) => {
         const sound = new Audio("/PopcornPop.mp3");
@@ -135,7 +158,7 @@ export default function CornClick() {
     return (
         <div className="center_align_column text_style corn_click_column ">
         <div className="farm_name_container rounded_corners">
-            <input type="text" className="farm_name" defaultValue="Farm Name" maxLength={12}/>
+            <input type="text" className="farm_name" onChange={handleChange} defaultValue={farmName} maxLength={12}/>
         </div>
         <div className="corn_info_container">
             <h1 className="corn_count">
