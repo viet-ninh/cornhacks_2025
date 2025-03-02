@@ -20,8 +20,8 @@ export default function PassiveWorkers() {
                 // If the item is new, give it a random position
                 if (item.count > currentPositions.length) {
                     const newSpritePositions: Position[] = Array.from({ length: item.count - currentPositions.length }, () => [
-                        `${Math.floor(Math.random() * 90) + 5}%`, // Random number between 5% to 95% to avoid placing on edge of box
-                        `${Math.floor(Math.random() * 90) + 5}%`,
+                        `${Math.floor(Math.random() * 80) + 10}%`, // Random number between 10% to 90% to avoid placing on edge of box
+                        `${Math.floor(Math.random() * 80) + 10}%`,
                     ]);
                     newPositions[item.id] = [...currentPositions, ...newSpritePositions];
                 }
@@ -32,7 +32,7 @@ export default function PassiveWorkers() {
     
 
     return (
-        <div>
+        <div className="passive_worker_column">
             {items.filter(item => item.count > 0).map(item =>
             // Background of each container
                 <div key={item.id} className="passive_worker_card">
@@ -42,25 +42,25 @@ export default function PassiveWorkers() {
                             alt={`container for ${item.name}`}
                             layout="fill"
                         />
-                    {/* Sprites within each worker card */}
-                    {spritePositions[item.id]?.map((position, index) => (
-                        <div
-                            key={`${item.id}-${index}`}
-                            className="worker_card_sprite"
-                            style={{
-                                left: position[0],
-                                top: position[1],
-                        }}>
-                        <Image
-                            src={`/passive-worker/sprite-${item.id}.png`}
-                            alt='sprite'
-                            layout="fill"
-                        />
+                        {/* Sprites within each worker card */}
+                        {spritePositions[item.id]?.map((position, index) => (
+                            <div
+                                key={`${item.id}-${index}`}
+                                className="worker_card_sprite"
+                                style={{
+                                    left: position[0],
+                                    top: position[1],
+                            }}>
+                            <Image
+                                src={`/passive-worker/sprite-${item.id}.png`}
+                                alt='sprite'
+                                layout="fill"
+                            />
+                            </div>
+                        ))}
                     </div>
-                ))}
                 </div>
-            </div>
-        )}
-    </div>
-);
+            )}
+        </div>
+    );
 }
