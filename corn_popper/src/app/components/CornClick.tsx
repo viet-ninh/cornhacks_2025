@@ -119,15 +119,13 @@ export default function CornClick() {
     // Update corn count by adding totalCPS every second
     useEffect(() => {
         const interval = setInterval(() => {
-            setCornCount((prevCornCount) => {
-                const newCornCount = prevCornCount + totalCPS;
-                Cookies.set('cornCount', newCornCount.toString(), { expires: 365 });  // Save to cookies
-                return newCornCount;
-            });
-        }, 1000); // Update every 1000 ms (1 second)
+            const newCornCount = cornCount + totalCPS;
+            setCornCount(newCornCount);
+            Cookies.set('cornCount', newCornCount.toString(), { expires: 365 });
+        }, 1000);
     
-        return () => clearInterval(interval);  // Cleanup on unmount
-    }, [totalCPS, setCornCount]); 
+        return () => clearInterval(interval);
+    }, [cornCount, totalCPS]);
      
     return (
         <div className="center_align_column text_style corn_click_column ">
