@@ -1,10 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import { useClickContext } from "./CornItemContext";
+
+
 
 const ResetButton: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isClient, setIsClient] = useState<boolean>(false); // To ensure code runs only on the client side
+  const { setReset } = useClickContext();
 
   useEffect(() => {
     setIsClient(true); // Ensure this code runs on the client side only
@@ -14,6 +18,7 @@ const ResetButton: React.FC = () => {
 
     try {
       // Create a new Audio object
+      setReset(true);
       const sound = new Audio("/Siren.mp3");
 
       // Wait for the audio to load before playing
@@ -22,22 +27,19 @@ const ResetButton: React.FC = () => {
 
       // Open the modal instead of alert
       setModalOpen(true);
-
-      // Clear all cookies
-      const cookies = Cookies.get(); // Get all cookies
-      Object.keys(cookies).forEach((cookieName) => {
-        Cookies.remove(cookieName);
-      });
-
       // Force a page reload after closing the modal
     } catch (error) {
       console.error("Error playing the sound:", error);
     }
   };
-
   const handleCloseModal = () => {
     setModalOpen(false);
     window.location.reload(); // Reload the page when modal is closed
+    // Clear all cookies
+    const cookies = Cookies.get(); // Get all cookies
+    Object.keys(cookies).forEach((cookieName) => {
+    Cookies.remove(cookieName);
+    });
   };
 
   if (!isClient) {

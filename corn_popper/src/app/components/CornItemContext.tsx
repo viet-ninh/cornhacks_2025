@@ -8,9 +8,11 @@ interface Item {
 
 interface CornItemContex {
   cornCount: number;
-  setCornCount: (count: number) => void;
+  setCornCount: (count: number) => void;  
   items: Item[];
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+  reset: boolean;
+  setReset: (reset: boolean) => void;
 }
 
 const CornItemContex = createContext<CornItemContex | undefined>(undefined);
@@ -40,8 +42,9 @@ export const ClickProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [cornCount, setCornCount] = useState<number>(-1);
   const [items, setItems] = useState<Item[]>(initItems);
+  const [reset, setReset] = useState<boolean>(false);
   return (
-    <CornItemContex.Provider value={{ cornCount, setCornCount, items, setItems }}>
+    <CornItemContex.Provider value={{ cornCount, setCornCount, items, setItems, reset, setReset }}>
       {children}
     </CornItemContex.Provider>
   );

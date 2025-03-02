@@ -10,7 +10,7 @@ import { useClickContext } from "./CornItemContext";
 
 export default function CornClick() {
 
-    const { cornCount, setCornCount, items, setItems } = useClickContext();
+    const { cornCount, setCornCount, items, setItems, reset } = useClickContext();
     const [clickedPositions, setClickedPositions] = useState<{x: number, y: number, x_direction: number, y_direction: number, time_created: number}[]>([])
     const [loading, setLoading] = useState<boolean>(true);
     const sceneRef = useRef<HTMLDivElement | null>(null);
@@ -122,6 +122,8 @@ export default function CornClick() {
 
     // Update corn count by adding totalCPS every second
     useEffect(() => {
+        if (reset) return; // Prevents effect execution if reset is true
+    
         const interval = setInterval(() => {
             const newCornCount = cornCount + totalCPS;
             setCornCount(newCornCount);
@@ -129,7 +131,7 @@ export default function CornClick() {
         }, 1000);
     
         return () => clearInterval(interval);
-    }, [cornCount, totalCPS]);
+    }, [cornCount, totalCPS, reset]); // Add reset to dependencies
      
     return (
         <div className="center_align_column text_style corn_click_column ">

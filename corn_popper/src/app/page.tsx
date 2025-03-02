@@ -8,9 +8,9 @@ import './globals.css'
 export default function Home() {
   return (
     <ClickProvider>
-      <ResetButton/>
       <div className="flex_container">
         <div className="flex_item overflow: 'hidden'">
+          <ResetButton/>
           <CornClick/>
         </div>
         <div className="flex_item" style={{flex: 2}}>
