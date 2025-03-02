@@ -142,7 +142,7 @@ export default function CornClick() {
     return (
         <div className="center_align_column text_style corn_click_column ">
         <div className="farm_name_container rounded_corners">
-            <h1 className="farm_name">Farm Name</h1>
+            <input type="text" className="farm_name" defaultValue="Farm Name" maxLength={12}/>
         </div>
         <div className="corn_info_container">
             <h1 className="corn_count">
