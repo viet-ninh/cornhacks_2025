@@ -22,7 +22,7 @@ export default function Item() {
         );
       }
     });
-  }, []); // Empty dependency array ensures it runs only once after the component mounts
+  }, [items, setItems]); 
 
   const BuyItem = (item: { id: number; name: string; cost: number; CPS: number; count: number }) => {
     if (cornCount >= item.cost) {
