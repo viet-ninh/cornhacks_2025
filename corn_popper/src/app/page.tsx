@@ -39,10 +39,10 @@ export default function Home() {
           </div>
           <CornClick/>
         </div>
-        <div className="flex_item" style={{flex: 2}}>
+        <div className="middle_flex_item">
           <PassiveWorkers/>
         </div>
-        <div className="flex_item p-4" >
+        <div className="flex_item" >
           <div className="h-full overflow-y-auto">
             <ItemList />
           </div>

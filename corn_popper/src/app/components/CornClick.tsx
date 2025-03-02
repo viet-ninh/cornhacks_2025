@@ -79,8 +79,8 @@ export default function CornClick() {
 
         if (!storedName) {
             // If the cookie doesn't exist, create it and set the value to 'Farm Name'
-            Cookies.set('farmName', 'Farm Name', { expires: 365 });
-            setFarmName('Farm Name'); // Update the state
+            Cookies.set('farmName', 'Farm Name ✏️', { expires: 365 });
+            setFarmName('Farm Name ✏️'); // Update the state
         } else {
             // If the cookie exists, use its value
             setFarmName(storedName);

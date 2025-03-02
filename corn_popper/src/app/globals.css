@@ -21,7 +21,7 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-color: rgb(148, 37, 14);
   background-image: url('../../public/page_background.jpg'
   );
   background-position: center;
@@ -37,8 +37,18 @@ div.flex_container {
   flex-direction: row;
 }
 
+@media screen and (max-width: 1000px) {
+  div.flex_container {
+    flex-direction: column;
+  }
+}
+
 div.flex_item {
   flex: 1;
+}
+
+div.middle_flex_item {
+  flex: 2
 }
 
 div.center_align_column {
@@ -131,6 +141,7 @@ div.center_align_column {
   border-style:solid;
   border-color:#171717;
   border-width: 5px;
+  touch-action: manipulation;
 }
 
 .corn_3d_box:hover {
@@ -147,6 +158,7 @@ div.center_align_column {
   border: 4px solid black;
   gap: 32px;
   margin: 40px;
+  user-select: none;
 }
 
 .passive_worker_card {
@@ -220,4 +232,8 @@ div.center_align_column {
 /* Apply shake animation on hover */
 .shake_image:hover {
   animation: shake 0.5s ease-in-out;
+}
+
+.right_menu_column {
+  user-select: none;
 }
