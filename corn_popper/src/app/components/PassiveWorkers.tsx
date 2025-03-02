@@ -46,7 +46,7 @@ export default function PassiveWorkers() {
                         {spritePositions[item.id]?.map((position, index) => (
                             <div
                                 key={`${item.id}-${index}`}
-                                className="worker_card_sprite"
+                                className="worker_card_sprite shake_image"
                                 style={{
                                     left: position[0],
                                     top: position[1],

@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { useClickContext } from "../CornItemContext";
 import { useEffect, useState } from 'react';
 import * as Helpers from '../../helpers';
+import Image from 'next/image';
 
 export default function Item() {
   const { cornCount, setCornCount, items, setItems } = useClickContext();
@@ -65,15 +66,24 @@ export default function Item() {
         >
           <div style={{ display: 'flex', justifyContent: 'space-between' }} onClick={() => BuyItem(item)} >
             {/* Column for name and cost */}
-            <div style={{ flex: 1 }}>
+            <div style={{ marginRight: '10px', alignContent: 'center'}}>
+              <Image
+                  src={`/passive-worker/sprite-${item.id}.png`}
+                  alt='?'
+                  width={40}
+                  height={40}
+              />
+            </div>
+
+            <div style={{ flex: 1 , fontSize: '22px', fontWeight: 'bold' }}>
               <div>{item.name}</div>
-              <div style={{ fontSize: '12px' }}>
+              <div style={{ fontSize: '16px' }}>
                 🌽{Helpers.formatNumber(item.cost)}
               </div>
             </div>
             
             {/* Column for item count */}
-            <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', alignContent: 'center', paddingRight: '10px'}}>
               {item.count === 0 ? null : item.count}
             </div>
           </div>

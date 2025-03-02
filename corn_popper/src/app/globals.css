@@ -74,6 +74,8 @@ div.center_align_column {
   font-size: 40px;
   margin: 6px;
   white-space: nowrap;
+  width: 300px;
+  text-align: center;
 }
 
 .corn_info_container {
@@ -112,6 +114,7 @@ div.center_align_column {
   position: absolute;
   pointer-events: none;
   animation: move_corn_plus_text 1s forwards;
+  z-index: 1;
 }
 
 @keyframes move_corn_plus_text {
@@ -143,6 +146,7 @@ div.center_align_column {
   overflow-y: scroll;
   border: 4px solid black;
   gap: 32px;
+  margin: 40px;
 }
 
 .passive_worker_card {
@@ -158,7 +162,61 @@ div.center_align_column {
 
 .worker_card_sprite {
   position: absolute;
-  height: 50px;
-  width: 50px;
+  height: 75px;
+  width: 75px;
   transform: translate(-50%, -50%);
+}
+
+/* Circle Button */
+.info-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Makes it a circle */
+  background-color: var(--transparent);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  cursor: point er;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-left: 20px;
+}
+
+/* Modal Overlay (Background) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal Content Box */
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 500px;
+  color: white;
+}
+
+@keyframes shake {
+  0% { transform: translate(-50%, -50%) translateX(0); }
+  25% { transform: translate(-50%, -50%) translateX(-5px); }
+  50% { transform: translate(-50%, -50%) translateX(5px); }
+  75% { transform: translate(-50%, -50%) translateX(-5px); }
+  100% { transform: translate(-50%, -50%) translateX(0); }
+}
+
+/* Apply shake animation on hover */
+.shake_image:hover {
+  animation: shake 0.5s ease-in-out;
 }
