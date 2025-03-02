@@ -181,6 +181,7 @@ div.center_align_column {
   align-items: center;
   justify-content: center;
   color: white;
+  margin-left: 20px;
 }
 
 /* Modal Overlay (Background) */
