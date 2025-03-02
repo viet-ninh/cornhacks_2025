@@ -56,17 +56,7 @@ export default function Item() {
               <div style={{ flex: 1 }}>
                 <div>{item.name}</div>
                 <div style={{ fontSize: '12px' }}>
-                  <img
-                    src="CornHackLogo.png"
-                    alt="Image"
-                    style={{
-                      height: '1em',
-                      width: 'auto',
-                      marginRight: '8px',
-                      display: 'inline-flex',
-                    }}
-                  />
-                  {Helpers.formatNumber(item.cost)}
+                🌽{Helpers.formatNumber(item.cost)}
                 </div>
               </div>
               {/* Column for item count */}
