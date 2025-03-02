@@ -74,6 +74,8 @@ div.center_align_column {
   font-size: 40px;
   margin: 6px;
   white-space: nowrap;
+  width: 300px;
+  text-align: center;
 }
 
 .corn_info_container {
