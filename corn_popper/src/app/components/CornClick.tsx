@@ -143,7 +143,7 @@ export default function CornClick() {
             <h1 className="corn_count">
                 {cornCount !== -1 ? `${Helpers.formatNumber(cornCount)} Corn` : `Loading...`}
             </h1>
-            <h3 className="corn_per_second">per second: {totalCPS}</h3>
+            <h3 className="corn_per_second">per second: {Helpers.formatNumber(totalCPS)}</h3>
         </div>
         <div ref={sceneRef} className="corn_3d_box" onClick={handleClick} ></div>
             {/* Conditionally render texts at the cursor positions if clickedPositions is not empty */}
