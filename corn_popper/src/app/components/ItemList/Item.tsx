@@ -2,7 +2,7 @@
 //import CornClick from "../CornClick";
 import Cookies from 'js-cookie';
 import { useClickContext } from "../CornItemContext";
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
 
 // interface ItemProps {
 //   items: { id: number; name: string; cost: number; CPS: number; count: number }[];
@@ -13,24 +13,38 @@ export default function Item() {
 
   const { cornCount, setCornCount, items, setItems } = useClickContext();
 
+  useEffect(() => {
+    const itemIds = items.map((item) => item.id);
+    itemIds.forEach((itemId) => {
+      const storedItem = Cookies.get(`item_id_${itemId}`);
+      if (storedItem) {
+        const parsedItem = JSON.parse(storedItem);
+        setItems((prevItems) =>
+          prevItems.map((prevItem) =>
+            prevItem.id === parsedItem.id ? parsedItem : prevItem
+          )
+        );
+      }
+    });
+}, [setItems]); // Empty dependency array ensures it runs only once after the component mounts
 
-  const BuyItem = (item: { id: number; name: string; cost: number; CPS: number; count: number }) => {
+  const  BuyItem = (item: { id: number; name: string; cost: number; CPS: number; count: number }) => {
     if (cornCount >= item.cost) {
       const newAmount = cornCount - item.cost;
       setCornCount(newAmount); // Deduct the cost from cornCount
       Cookies.set('cornCount', newAmount.toString(), { expires: 365}); 
-      console.log(`Purchased: ${item.name}`);
-      // You can also update the item's count or other logic here
-      //item with id = 1 currentItem = id = 1
-      // items = [{item1}, {item2}, {item3}]
-      setItems((prevItems) =>
-        prevItems.map((prevItem) =>
+      setItems((prevItems) => {
+        const updatedItems = prevItems.map((prevItem) =>
           prevItem.id === item.id ? { ...prevItem, count: prevItem.count + 1 } : prevItem
-        )
-      );
-      console.log(JSON.stringify(item));
-      Cookies.set(`item_id_${item.id}`, JSON.stringify(item) , { expires: 365}); 
-
+        );
+      
+        const updatedItem = updatedItems.find(i => i.id === item.id);
+        if (updatedItem) {
+          Cookies.set(`item_id_${item.id}`, JSON.stringify(updatedItem), { expires: 365 });
+        }
+      
+        return updatedItems;
+      });
 
     } else {
       console.log('Not enough cookies to buy this item.');
