@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useClickContext } from "./CornItemContext";
-import martian from '../../../public/martian.gif';
 
 
 const ResetButton: React.FC = () => {
