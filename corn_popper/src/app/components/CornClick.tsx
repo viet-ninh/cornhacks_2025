@@ -13,7 +13,6 @@ export default function CornClick() {
 
     const { cornCount, setCornCount, items, setItems, reset, clickMultiplier, setClickMultiplier } = useClickContext();
     const [clickedPositions, setClickedPositions] = useState<{ x: number, y: number, x_direction: number, y_direction: number, time_created: number }[]>([])
-    const [loading, setLoading] = useState<boolean>(true);
     const sceneRef = useRef<HTMLDivElement | null>(null);
     const [totalCPS, setTotalCPS] = useState<number>(0);
 
@@ -26,7 +25,6 @@ export default function CornClick() {
         } else {
             setCornCount(0); // Set to 0 if the cookie doesn't exist
         }
-        setLoading(false); // Set loading to false after cookies are read
     }, [setCornCount]); // Empty dependency array ensures it runs only once after the component mounts
 
     // Corn animation
