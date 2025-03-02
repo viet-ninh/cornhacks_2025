@@ -112,6 +112,7 @@ div.center_align_column {
   position: absolute;
   pointer-events: none;
   animation: move_corn_plus_text 1s forwards;
+  z-index: 1;
 }
 
 @keyframes move_corn_plus_text {
