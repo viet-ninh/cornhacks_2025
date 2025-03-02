@@ -2,6 +2,7 @@
 import Cookies from 'js-cookie';
 import { useClickContext } from "../CornItemContext";
 import {  useEffect } from 'react';
+import * as Helpers from '../../helpers';
 
 export default function Item() {
 
@@ -29,7 +30,7 @@ export default function Item() {
       Cookies.set('cornCount', newAmount.toString(), { expires: 365}); 
       setItems((prevItems) => {
         const updatedItems = prevItems.map((prevItem) =>
-          prevItem.id === item.id ? { ...prevItem, count: prevItem.count + 1 } : prevItem
+          prevItem.id === item.id ? { ...prevItem, count: prevItem.count + 1, cost: Math.ceil(prevItem.cost * 1.15) } : prevItem
         );
       
         const updatedItem = updatedItems.find(i => i.id === item.id);
@@ -65,7 +66,7 @@ export default function Item() {
                       display: 'inline-flex',
                     }}
                   />
-                  {item.cost}
+                  {Helpers.formatNumber(item.cost)}
                 </div>
               </div>
               {/* Column for item count */}
