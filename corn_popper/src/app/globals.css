@@ -139,9 +139,18 @@ div.center_align_column {
 .passive_worker_card {
   background-color: var(--transparent);
   margin: 2px;
+  border-color: #0a0a0a;
+  border-width: 4px;
 }
 
-.right_align {
-  margin-left: auto;
+.worker_card_background {
+  position: relative;
+  height: 200px;
 }
 
+.worker_card_sprite {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  transform: translate(-50%, -50%);
+}
