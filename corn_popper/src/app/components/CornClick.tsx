@@ -75,9 +75,11 @@ export default function CornClick() {
         const sound = new Audio("/PopcornPop.mp3");
         sound.load()
         sound.play()
-        const newCount = cornCount + 1;
-        setCornCount(newCount);
-        Cookies.set('cornCount', newCount.toString(), {expires: 365}); 
+        setCornCount((prevCount) => {
+            const newCount = prevCount + 1;
+            Cookies.set('cornCount', newCount.toString(), { expires: 365 });
+            return newCount;
+        });
         
         // Get random number -1 to 1
         const x_direction = (Math.random() * 2) - 1
@@ -123,16 +125,18 @@ export default function CornClick() {
 
     // Update corn count by adding totalCPS every second
     useEffect(() => {
-        if (reset) return; // Prevents effect execution if reset is true
+        if (reset) return;
     
         const interval = setInterval(() => {
-            const newCornCount = cornCount + totalCPS;
-            setCornCount(newCornCount);
-            Cookies.set('cornCount', newCornCount.toString(), { expires: 365 });
+            setCornCount((prevCount) => {
+                const newCornCount = prevCount + totalCPS;
+                Cookies.set('cornCount', newCornCount.toString(), { expires: 365 });
+                return newCornCount;
+            });
         }, 1000);
     
         return () => clearInterval(interval);
-    }, [cornCount, totalCPS, reset]); // Add reset to dependencies
+    }, [totalCPS, reset]); // Remove cornCount from dependencies
      
     return (
         <div className="center_align_column text_style corn_click_column ">

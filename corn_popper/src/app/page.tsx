@@ -3,9 +3,11 @@ import ItemList from './components/ItemList/ItemList';
 import { ClickProvider } from './components/CornItemContext';
 import ResetButton from './components/ResetButton';
 import PassiveWorkers from './components/PassiveWorkers';
+
 import './globals.css'
 
 export default function Home() {
+  
   return (
     <ClickProvider>
       <div className="flex_container">
