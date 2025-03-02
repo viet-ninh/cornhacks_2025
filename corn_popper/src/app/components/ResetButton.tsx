@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 import { useClickContext } from "./CornItemContext";
 
 
-
 const ResetButton: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isClient, setIsClient] = useState<boolean>(false); // To ensure code runs only on the client side
@@ -22,7 +21,7 @@ const ResetButton: React.FC = () => {
       const sound = new Audio("/Siren.mp3");
 
       // Wait for the audio to load before playing
-      await sound.load();
+      sound.load();
       sound.play(); // Play the sound
 
       // Open the modal instead of alert
@@ -68,6 +67,7 @@ const ResetButton: React.FC = () => {
           <div style={modalStyles} onClick={handleCloseModal}>
             <h2>ITS A MARTIAN APOCALYPSE!!!!</h2>
             <p>You just lost all of your corn, loser!!!</p>
+            <img src="/martian.gif" alt="martian abduction" />
           </div>
         </div>
       )}

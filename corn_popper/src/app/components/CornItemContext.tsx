@@ -13,6 +13,8 @@ interface CornItemContex {
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
   reset: boolean;
   setReset: (reset: boolean) => void;
+  final: boolean;
+  setFinal: (final: boolean) => void;
   clickMultiplier: number;
   setClickMultiplier: (count: number) => void;
 }
@@ -45,10 +47,11 @@ export const ClickProvider = ({ children }: { children: React.ReactNode }) => {
   const [cornCount, setCornCount] = useState<number>(-1);
   const [items, setItems] = useState<Item[]>(initItems);
   const [reset, setReset] = useState<boolean>(false);
+  const [final, setFinal] = useState<boolean>(false);
   const [clickMultiplier, setClickMultiplier] = useState<number>(1);
 
   return (
-    <CornItemContex.Provider value={{ cornCount, setCornCount, items, setItems, reset, setReset, clickMultiplier, setClickMultiplier }}>
+    <CornItemContex.Provider value={{ cornCount, setCornCount, items, setItems, reset, setReset, clickMultiplier, setClickMultiplier, final, setFinal }}>
       {children}
     </CornItemContex.Provider>
   );
