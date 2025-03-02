@@ -2,6 +2,7 @@ import CornClick from './components/CornClick'
 import ItemList from './components/ItemList/ItemList';
 import { ClickProvider } from './components/CornItemContext';
 import ResetButton from './components/ResetButton';
+import PassiveWorkers from './components/PassiveWorkers';
 import './globals.css'
 
 export default function Home() {
@@ -13,8 +14,7 @@ export default function Home() {
           <CornClick/>
         </div>
         <div className="flex_item">
-          {/* center screen goes here */}
-
+          <PassiveWorkers/>
         </div>
         <div className="flex_item p-4" >
           <ItemList/>

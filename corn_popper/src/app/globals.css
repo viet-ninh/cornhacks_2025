@@ -127,3 +127,15 @@ div.center_align_column {
   border-color:#171717;
   border-width: 2px;
 }
+
+/* Passive Workers Styling */
+
+.passive_worker_card {
+  background-color: var(--transparent);
+  margin: 2px;
+}
+
+.right_align {
+  margin-left: auto;
+}
+
