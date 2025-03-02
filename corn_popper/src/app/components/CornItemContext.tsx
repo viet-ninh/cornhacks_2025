@@ -8,7 +8,7 @@ interface Item {
 
 interface CornItemContex {
   cornCount: number;
-  setCornCount: (count: number) => void;  
+  setCornCount: React.Dispatch<React.SetStateAction<number>>;  
   items: Item[];
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
   reset: boolean;
