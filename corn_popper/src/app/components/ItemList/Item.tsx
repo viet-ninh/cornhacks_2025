@@ -25,6 +25,9 @@ export default function Item() {
 
   const  BuyItem = (item: { id: number; name: string; cost: number; CPS: number; count: number }) => {
     if (cornCount >= item.cost) {
+      const sound = new Audio("/CornSound.mp3");
+      sound.load()
+      sound.play()
       const newAmount = cornCount - item.cost;
       setCornCount(newAmount); // Deduct the cost from cornCount
       Cookies.set('cornCount', newAmount.toString(), { expires: 365}); 

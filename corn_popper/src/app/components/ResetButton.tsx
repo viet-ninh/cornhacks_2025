@@ -14,7 +14,7 @@ const ResetButton: React.FC = () => {
 
     try {
       // Create a new Audio object
-      const sound = new Audio("/siren.mp3");
+      const sound = new Audio("/Siren.mp3");
 
       // Wait for the audio to load before playing
       await sound.load();

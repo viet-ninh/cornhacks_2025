@@ -15,6 +15,7 @@ export default function CornClick() {
     const [loading, setLoading] = useState<boolean>(true);
     const sceneRef = useRef<HTMLDivElement | null>(null);
 
+    
     useEffect(() => {
         // Read the cookie after the component has mounted
         const storedCount = Cookies.get('cornCount');
@@ -70,6 +71,9 @@ export default function CornClick() {
     }, []);
 
     const handleClick = (event: React.MouseEvent) => {
+        const sound = new Audio("/PopcornPop.mp3");
+        sound.load()
+        sound.play()
         const newCount = cornCount + 1;
         setCornCount(newCount);
         Cookies.set('cornCount', newCount.toString(), {expires: 365}); 
