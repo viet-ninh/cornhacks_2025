@@ -47,7 +47,8 @@ export default function Item() {
   };
   
   return (
-      items.map((item, index) => {      
+      items.map((item, index) => {
+        const affordable = cornCount >= item.cost || item.count > 0;   
 
         return (
           <li key={index} className="item_button block p-2 hover:bg-gray-700 rounded">
@@ -56,17 +57,7 @@ export default function Item() {
               <div style={{ flex: 1 }}>
                 <div>{item.name}</div>
                 <div style={{ fontSize: '12px' }}>
-                  <img
-                    src="CornHackLogo.png"
-                    alt="Image"
-                    style={{
-                      height: '1em',
-                      width: 'auto',
-                      marginRight: '8px',
-                      display: 'inline-flex',
-                    }}
-                  />
-                  {Helpers.formatNumber(item.cost)}
+                🌽{Helpers.formatNumber(item.cost)}
                 </div>
               </div>
               {/* Column for item count */}

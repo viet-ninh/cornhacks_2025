@@ -13,7 +13,7 @@ export default function Home() {
         <div className="flex_item overflow: 'hidden'">
           <CornClick/>
         </div>
-        <div className="flex_item">
+        <div className="flex_item" style={{flex: 2}}>
           <PassiveWorkers/>
         </div>
         <div className="flex_item p-4" >
