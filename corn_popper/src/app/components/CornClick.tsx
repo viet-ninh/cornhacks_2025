@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three-stdlib';
 import { MTLLoader } from 'three-stdlib';
 import { useClickContext } from "./CornItemContext";
+import * as Helpers from '../helpers';
 
 
 export default function CornClick() {
@@ -138,7 +139,7 @@ export default function CornClick() {
         </div>
         <div className="corn_info_container">
             <h1 className="corn_count">
-                {cornCount !== -1 ? `${cornCount} Corn` : `Loading...`}
+                {cornCount !== -1 ? `${Helpers.formatNumber(cornCount)} Corn` : `Loading...`}
             </h1>
             <h3 className="corn_per_second">per second: {totalCPS}</h3>
         </div>
