@@ -103,8 +103,11 @@ div.center_align_column {
 /*#region Button styling*/
 .item_button:hover {
   cursor: pointer;
+  user-select: none; 
 }
-/*#endregion RegionName*/
+
+/*#endregion Button styling*/
+
 .corn_plus_text {
   position: absolute;
   pointer-events: none;
@@ -125,6 +128,10 @@ div.center_align_column {
   border-style:solid;
   border-color:#171717;
   border-width: 5px;
+}
+
+.corn_3d_box:hover {
+  cursor: pointer;
 }
 
 /* Passive Workers Styling */

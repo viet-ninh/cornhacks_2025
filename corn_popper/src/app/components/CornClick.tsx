@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three-stdlib';
 import { MTLLoader } from 'three-stdlib';
 import { useClickContext } from "./CornItemContext";
+import * as Helpers from '../helpers';
 
 
 export default function CornClick() {
@@ -15,6 +16,7 @@ export default function CornClick() {
     const [loading, setLoading] = useState<boolean>(true);
     const sceneRef = useRef<HTMLDivElement | null>(null);
 
+    
     useEffect(() => {
         // Read the cookie after the component has mounted
         const storedCount = Cookies.get('cornCount');
@@ -70,6 +72,9 @@ export default function CornClick() {
     }, []);
 
     const handleClick = (event: React.MouseEvent) => {
+        const sound = new Audio("/PopcornPop.mp3");
+        sound.load()
+        sound.play()
         const newCount = cornCount + 1;
         setCornCount(newCount);
         Cookies.set('cornCount', newCount.toString(), {expires: 365}); 
@@ -85,6 +90,47 @@ export default function CornClick() {
             setClickedPositions((prevPositions) => prevPositions.filter(click => click !== newClick));
         }, 1000);
     };
+    //calculate total CPS
+    const [totalCPS, setTotalCPS] = useState(0);
+
+    useEffect(() => {
+        const itemIds = items.map((item) => item.id);
+        
+        // Reading cookies for each item
+        itemIds.forEach((itemId) => {
+            const storedItem = Cookies.get(`item_id_${itemId}`);
+            if (storedItem) {
+                const parsedItem = JSON.parse(storedItem);
+
+                // Update items state with the parsed item data
+                setItems((prevItems) =>
+                    prevItems.map((prevItem) =>
+                        prevItem.id === parsedItem.id ? parsedItem : prevItem
+                    )
+                );
+            }
+        });
+    }, []); // This runs once, when the component first mounts
+
+    // 2. Recalculate total CPS whenever the `items` state changes
+    useEffect(() => {
+        const newTotalCPS = items.reduce((sum, item) => {
+            return sum + (item.count * item.CPS);
+        }, 0);
+
+        setTotalCPS(newTotalCPS);  // Set the calculated total CPS
+    }, [items]);  // This runs every time `items` changes
+
+    // Update corn count by adding totalCPS every second
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const newCornCount = cornCount + totalCPS;
+            setCornCount(newCornCount);
+            Cookies.set('cornCount', newCornCount.toString(), { expires: 365 });
+        }, 1000);
+    
+        return () => clearInterval(interval);
+    }, [cornCount, totalCPS]);
      
     return (
         <div className="center_align_column text_style corn_click_column ">
@@ -93,9 +139,9 @@ export default function CornClick() {
         </div>
         <div className="corn_info_container">
             <h1 className="corn_count">
-                {cornCount !== -1 ? `${cornCount} Corn` : `Loading...`}
+                {cornCount !== -1 ? `${Helpers.formatNumber(cornCount)} Corn` : `Loading...`}
             </h1>
-            <h3 className="corn_per_second">per second: 0</h3>
+            <h3 className="corn_per_second">per second: {totalCPS}</h3>
         </div>
         <div ref={sceneRef} className="corn_3d_box" onClick={handleClick} ></div>
             {/* Conditionally render texts at the cursor positions if clickedPositions is not empty */}
