@@ -4,15 +4,30 @@ import Cookies from 'js-cookie';
 export default function ResetButton() {
   const [clicked, setClicked] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setClicked(true);
-    alert('ITS A MARTIAN APOCOLAPSE!!!! YOU JUST LOST ALL OF YOUR CORN LOSER!!!!!');
-
-    const cookies = Cookies.get(); // Get all cookies
-    Object.keys(cookies).forEach((cookieName) => {
-    Cookies.remove(cookieName);
-    });
-    window.location.reload();
+  
+    try {
+      // Create a new Audio object
+      const sound = new Audio('/siren.mp3');
+      
+      // Wait for the audio to load before playing
+      await sound.load();
+      sound.play(); // Play the sound
+      
+      alert('ITS A MARTIAN APOCOLAPSE!!!! YOU JUST LOST ALL OF YOUR CORN LOSER!!!!!');
+      
+      // Clear all cookies
+      const cookies = Cookies.get(); // Get all cookies
+      Object.keys(cookies).forEach((cookieName) => {
+        Cookies.remove(cookieName);
+      });
+  
+      // Force a page reload
+      window.location.reload();
+    } catch (error) {
+      console.error('Error playing the sound:', error);
+    }
   };
 
   return (
