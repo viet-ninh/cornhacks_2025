@@ -47,7 +47,8 @@ export default function Item() {
   };
   
   return (
-      items.map((item, index) => {      
+      items.map((item, index) => {
+        const affordable = cornCount >= item.cost || item.count > 0   
 
         return (
           <li key={index} className="item_button block p-2 hover:bg-gray-700 rounded">
