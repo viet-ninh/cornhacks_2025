@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import * as Helpers from '../../helpers';
 
 export default function Item() {
-  const { cornCount, setCornCount, items, setItems } = useClickContext();
+  const { cornCount, setCornCount, items, setItems, setFinal } = useClickContext();
   const [hoveredItem, setHoveredItem] = useState<number | null>(null); // Track hovered item ID
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -40,6 +40,10 @@ export default function Item() {
         const updatedItem = updatedItems.find(i => i.id === item.id);
         if (updatedItem) {
           Cookies.set(`item_id_${item.id}`, JSON.stringify(updatedItem), { expires: 365 });
+        }
+        
+        if (item.id === 11){
+          setFinal(true);
         }
 
         return updatedItems;

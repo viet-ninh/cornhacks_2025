@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 import Image from 'next/image';
 import cornLover from "../../../public/cornLover.gif"
+import cornhacksGuy from "../../../public/CornhacksGuy.gif"
+import { useClickContext } from "./CornItemContext";
 const InfoButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const {final} = useClickContext();
   return (
     <div>
       {/* Info Button */}
@@ -26,6 +28,14 @@ const InfoButton = () => {
                   got one thing it doesn’t—an undying love for corn.
             </p>
             <Image src={cornLover} alt="Animated GIF"/>
+          </div>
+        </div>
+      )}
+      {final && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2 style={{ fontSize: "40px", fontWeight: "bold" }}>Congratulations you win!</h2>
+            <Image src={cornhacksGuy} alt="Animated GIF"/>
           </div>
         </div>
       )}
